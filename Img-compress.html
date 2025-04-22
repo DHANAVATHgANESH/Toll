@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online image compression tool - optimize your images for web with adjustable compression levels. Reduce file size while maintaining quality.">
+    <meta name="keywords" content="image compressor, optimize images, reduce image size, web image optimization">
+    <title>PixelSqueeze | Modern Image Compression Tool</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+            crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --accent: #10b981;
+            --background: #f8fafc;
+            --text: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0;
+        }
+
+        .upload-section {
+            border: 2px dashed #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            transition: border-color 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .upload-section.dragover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .preview-card {
+            background: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .preview-img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            object-fit: cover;
+        }
+
+        .controls {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .range-slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            background: #e2e8f0;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3);
+        }
+
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 0.5rem;
+        }
+
+        .ad-container {
+            margin: 2rem 0;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .preview-container {
+                grid-template-columns: 1fr;
+            }
+
+            .file-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Ad -->
+    <div class="container">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">PixelSqueeze</h1>
+            <p>Optimize images instantly with modern compression technology</p>
+        </header>
+
+        <main class="main-card">
+            <div class="upload-section" id="dropZone">
+                <input type="file" id="imageInput" accept="image/*" class="visually-hidden">
+                <label for="imageInput" class="button" role="button">
+                    📁 Choose Image
+                </label>
+                <p class="drag-text" style="margin-top: 1rem; color: #64748b;">
+                    or drag and drop files here
+                </p>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-card">
+                    <h3>Original Image</h3>
+                    <img id="originalPreview" class="preview-img" alt="Original preview">
+                    <div class="file-info">
+                        <div>
+                            <div class="file-size">Size: <span id="originalSize">-</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-card">
+                    <h3>Compressed Image</h3>
+                    <img id="compressedPreview" class="preview-img" alt="Compressed preview">
+                    <div class="file-info">
+                        <div>
+                            <div class="file-size">Size: <span id="compressedSize">-</span></div>
+                            <div class="quality-info">Quality: <span id="qualityValue">80</span>%</div>
+                        </div>
+                        <a id="downloadLink" style="display: none;">
+                            <button class="button">💾 Download</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <label class="slider-label">
+                    Compression Level
+                    <input type="range" id="quality" class="range-slider" min="0" max="100" value="80">
+                </label>
+                <button class="button" onclick="compressImage()">✨ Compress Now</button>
+            </div>
+        </main>
+
+        <!-- Footer Ad -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript remains similar to previous version with added drag-drop functionality
+        const dropZone = document.getElementById('dropZone');
+        const imageInput = document.getElementById('imageInput');
+        
+        // Add drag and drop handlers
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files[0] && files[0].type.startsWith('image/')) {
+                imageInput.files = files;
+                handleImageUpload(files[0]);
+            }
+        });
+
+        // Rest of the compression logic remains similar to previous version
+        // ... [Include previous JavaScript code here] ...
+    </script>
+</body>
+</html>
